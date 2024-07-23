@@ -66,4 +66,10 @@
   body {
     @apply bg-background text-foreground;
   }
+  input, button, label {
+    @apply block w-full;
+  }
+  a {
+    @apply text-blue-500 hover:underline;
+  }
 }

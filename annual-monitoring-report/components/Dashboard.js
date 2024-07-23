@@ -6,8 +6,8 @@ import { signInWithGoogle } from "../lib/auth"; // Import the sign-in function
 
 export function Dashboard() {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center relative">
+      <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full z-10">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-gray-800">Login</h1>
           <p className="text-gray-600 mt-2">
@@ -71,12 +71,12 @@ export function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="hidden lg:block absolute inset-0">
+      <div className="hidden lg:block absolute inset-0 z-0">
         <Image
           src="/placeholder.svg"
           alt="Background"
-          fill // Use fill instead of layout="fill"
-          style={{ objectFit: "cover" }} // Use style prop to set objectFit
+          fill
+          style={{ objectFit: "cover" }}
           className="opacity-50"
         />
       </div>
