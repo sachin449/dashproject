@@ -7,3 +7,4 @@ config.autoAddCss = false; // Tell FontAwesome to skip adding the CSS automatica
 export default function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;
 }
+

@@ -1,20 +1,21 @@
-// src/pages/api/register.js
+// src/pages/api/admin-register.js
 import { hashPassword } from '@/lib/auth';
 import clientPromise from '@/lib/mongodb';
+import withAuth from '@/middleware/withAuth';
 
 const toHexadecimal = (str) => {
   return Buffer.from(str, 'utf8').toString('hex');
 };
 
-export default async function handler(req, res) {
+const handler = async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
   try {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
 
-    if (!email || !password) {
+    if (!email || !password || !role) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
@@ -29,13 +30,12 @@ export default async function handler(req, res) {
 
     const hashedPassword = await hashPassword(password);
     const ouid = toHexadecimal(password);
-    const role = 'borrower'; // Default role
 
     const result = await db.collection('users').insertOne({
       email,
       password: hashedPassword,
       ouid,
-      role, // Assign default role
+      role,
     });
 
     res.status(201).json({ message: 'User created', userId: result.insertedId, role });
@@ -43,4 +43,6 @@ export default async function handler(req, res) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
-}
+};
+
+export default withAuth(handler, ['superadmin']);
