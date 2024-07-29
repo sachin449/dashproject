@@ -15,11 +15,7 @@ export default function HomePage() {
         </Link>
       </div>
       <h1 className="text-4xl font-bold">Welcome to Next.js Custom Auth</h1>
-      {/* <div className="mt-6">
-        <Link href="/auth" className="px-4 py-2 bg-blue-500 text-white rounded">
-          Login / Register
-        </Link>
-      </div> */}
+      
     </div>
   );
 }
