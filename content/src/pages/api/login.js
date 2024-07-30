@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     const token = generateToken({ id: user._id, email: user.email, role: user.role });
     console.log('Token generated for user:', email);
 
-    res.status(200).json({ token });
+    res.status(200).json({ token, role: user.role });
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ message: 'Internal Server Error' });
