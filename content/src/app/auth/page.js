@@ -45,10 +45,10 @@ export default function AuthPage() {
         }, 500);
       } else {
         await axios.post('/api/register', { email, password });
-        toast.success('Successfully registered! please click on login button now ');
+        toast.success('Successfully registered! Redirecting to login page...');
         setTimeout(() => {
-          router.push('/auth');
-        }, 2000);
+          setIsLogin(true); // Switch to login form after successful registration
+        }, 500);
       }
     } catch (error) {
       setError(error.response.data.message);
