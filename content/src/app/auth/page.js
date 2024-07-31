@@ -45,7 +45,7 @@ export default function AuthPage() {
         }, 500);
       } else {
         await axios.post('/api/register', { email, password });
-        toast.success('Successfully registered! Redirecting to login page...');
+        toast.success('Successfully registered! please click on login button now ');
         setTimeout(() => {
           setIsLogin(true); // Switch to login form after successful registration
         }, 500);
