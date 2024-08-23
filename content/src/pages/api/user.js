@@ -1,4 +1,3 @@
-// src/pages/api/user.js
 import { verifyToken } from '@/lib/auth';
 import clientPromise from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';

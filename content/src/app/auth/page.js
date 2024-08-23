@@ -29,9 +29,9 @@ export default function AuthPage() {
     try {
       if (isLogin) {
         const response = await axios.post('/api/login', { email, password });
-        document.cookie = `token=${response.data.token}; path=/`;
-        const userRole = response.data.role;
         toast.success('Successfully logged in!');
+        console.log('Login response:', response.data);
+        const userRole = response.data.role;
         setTimeout(() => {
           if (userRole === 'borrower') {
             router.push('/borrower-dashboard');
@@ -40,18 +40,19 @@ export default function AuthPage() {
           } else if (userRole === 'superadmin') {
             router.push('/superadmin-dashboard');
           } else {
-            router.push('/auth'); // fallback route
+            router.push('/auth');
           }
         }, 500);
       } else {
-        await axios.post('/api/register', { email, password });
-        toast.success('Successfully registered! please click on login button now ');
+        await axios.post('/api/register', { email, password, role: 'borrower' });
+        toast.success('Successfully registered! Please click on the login button now.');
         setTimeout(() => {
-          setIsLogin(true); // Switch to login form after successful registration
+          setIsLogin(true);
         }, 500);
       }
     } catch (error) {
       setError(error.response.data.message);
+      console.error('Auth error:', error);
       toast.error(isLogin ? 'Login failed. Please check your credentials.' : 'Registration failed. Please try again.');
     }
   };

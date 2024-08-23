@@ -1,4 +1,3 @@
-// src/pages/api/register.js
 import { hashPassword } from '@/lib/auth';
 import clientPromise from '@/lib/mongodb';
 
@@ -12,9 +11,9 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
 
-    if (!email || !password) {
+    if (!email || !password || !role) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
@@ -29,13 +28,12 @@ export default async function handler(req, res) {
 
     const hashedPassword = await hashPassword(password);
     const ouid = toHexadecimal(password);
-    const role = 'borrower'; // Default role
 
     const result = await db.collection('users').insertOne({
       email,
       password: hashedPassword,
       ouid,
-      role, // Assign default role
+      role,
     });
 
     res.status(201).json({ message: 'User created', userId: result.insertedId, role });

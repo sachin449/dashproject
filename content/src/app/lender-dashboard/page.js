@@ -1,5 +1,9 @@
-// src/pages/lender-dashboard.js
-export default function LenderDashboard() {
+"use client";
+
+import ProtectRoute from '@/lib/ProtectRoute';
+import React from 'react';
+
+function LenderDashboard() {
   return (
     <div>
       <h1>Lender Dashboard</h1>
@@ -7,3 +11,5 @@ export default function LenderDashboard() {
     </div>
   );
 }
+
+export default ProtectRoute(LenderDashboard, ['lender']);
